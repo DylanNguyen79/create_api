@@ -39,13 +39,13 @@ end
 
   def destroy
     user = User.find_by(id: params[:id])
-   
-    if user.nil? 
-        render json: { message: "Người dùng không tồn tại"}, status: :not_found
+
+    if user.nil?
+        render json: { message: "Người dùng không tồn tại" }, status: :not_found
     elsif user.destroy
         render json: { message: "Đã xoá" }, status: :ok
     else
-        render json: {message: "Không tìm thấy người dùng"}, status: :unprocessable_entity
+        render json: { message: "Không tìm thấy người dùng" }, status: :unprocessable_entity
     end
   end
 
