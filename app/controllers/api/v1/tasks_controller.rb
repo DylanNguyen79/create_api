@@ -32,7 +32,7 @@ class Api::V1::TasksController < ApplicationController
         if task && task.update(task_params)
             render json: task, status: :ok
         else
-            render json: {message: "Task không tồn tại hoặc cập nhật thất bại"}, status: unprocessable_entity
+            render json: { message: "Task không tồn tại hoặc cập nhật thất bại" }, status: unprocessable_entity
         end
     end
 

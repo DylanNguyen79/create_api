@@ -52,5 +52,4 @@ class Api::V1::ProjectsController < ApplicationController
   def project_params
     params.permit(:name, :description, :owner_id)
   end
- end
 end

@@ -6,5 +6,5 @@ class User < ApplicationRecord
            class_name: "Project",
            foreign_key: "owner_id"
 
-      has_many :tasks  
+      has_many :tasks
 end
