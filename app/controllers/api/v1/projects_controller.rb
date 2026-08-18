@@ -1,5 +1,4 @@
 class Api::V1::ProjectsController < ApplicationController
-    class Api::V1::ProjectsController < ApplicationController
   skip_forgery_protection
 
   def index
@@ -53,5 +52,5 @@ class Api::V1::ProjectsController < ApplicationController
   def project_params
     params.permit(:name, :description, :owner_id)
   end
-    end
+ end
 end

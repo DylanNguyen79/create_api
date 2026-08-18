@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
       resources :users
       resources :projects
+      resources :tasks
     end
   end
 end
