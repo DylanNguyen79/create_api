@@ -1,13 +1,13 @@
 class Api::V1::TasksController < ApplicationController
-    skip_forgery_protection
+    before_action :authenticate_request
 
     def index
-        tasks = Task.all
+        tasks = @current_user.tasks
         render json: tasks
     end
 
     def show
-        task = Task.find_by(id: params[:id])
+        task = @current_user.tasks.find_by(id: params[:id])
 
         if task
             render json: task, status: :ok
@@ -17,7 +17,7 @@ class Api::V1::TasksController < ApplicationController
     end
 
     def create
-        task = Task.new(task_params)
+        task = @current_user.tasks.new(task_params)
 
         if task.save
             render json: task, status: :created
@@ -27,7 +27,7 @@ class Api::V1::TasksController < ApplicationController
     end
 
     def update
-        task = Task.find_by(id: params[:id])
+        task = @current_user.tasks.find_by(id: params[:id])
 
         if task && task.update(task_params)
             render json: task, status: :ok
@@ -37,7 +37,7 @@ class Api::V1::TasksController < ApplicationController
     end
 
     def destroy
-        task = Task.find_by(id: params[:id])
+        task = @current_user.tasks.find_by(id: params[:id])
 
         if task && task.destroy
             render json: { message: "Đã xoá task" }, status: :ok
@@ -55,7 +55,6 @@ class Api::V1::TasksController < ApplicationController
            :status,
            :due_date,
            :project_id,
-           :user_id
         )
     end
 end

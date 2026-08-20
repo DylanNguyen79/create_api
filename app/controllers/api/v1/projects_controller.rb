@@ -1,6 +1,4 @@
 class Api::V1::ProjectsController < ApplicationController
-  skip_forgery_protection
-
   def index
     projects = Project.all
     render json: projects

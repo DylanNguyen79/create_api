@@ -1,6 +1,4 @@
 class Api::V1::AuthController < ApplicationController
-  skip_forgery_protection
-
   def signup
     user = User.new(user_params)
 

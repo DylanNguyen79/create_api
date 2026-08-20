@@ -1,6 +1,4 @@
 class Api::V1::UsersController < ApplicationController
-skip_forgery_protection
-
   def index
     users = User.all
 
