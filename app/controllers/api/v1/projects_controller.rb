@@ -1,11 +1,13 @@
 class Api::V1::ProjectsController < ApplicationController
+   before_action :authenticate_request
+
   def index
-    projects = Project.all
-    render json: projects
+    projects = @current_user.projects
+    render json: projects, status: :ok
   end
 
   def show
-    project = Project.find_by(id: params[:id])
+    project = @current_user.projects.find_by(id: params[:id])
 
     if project
       render json: project, status: :ok
@@ -15,7 +17,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def create
-    project = Project.new(project_params)
+    project = @current_user.projects.new(project_params)
 
     if project.save
       render json: project, status: :created
@@ -25,7 +27,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def update
-    project = Project.find_by(id: params[:id])
+    project = @current_user.projects.find_by(id: params[:id])
 
     if project && project.update(project_params)
       render json: project, status: :ok
@@ -36,7 +38,7 @@ class Api::V1::ProjectsController < ApplicationController
   end
 
   def destroy
-    project = Project.find_by(id: params[:id])
+    project = @current_user.projects.find_by(id: params[:id])
 
     if project && project.destroy
       render json: { message: "Đã xoá project" }, status: :ok
@@ -48,6 +50,6 @@ class Api::V1::ProjectsController < ApplicationController
   private
 
   def project_params
-    params.permit(:name, :description, :owner_id)
+    params.permit(:name, :description)
   end
 end
