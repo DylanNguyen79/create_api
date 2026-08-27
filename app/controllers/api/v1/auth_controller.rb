@@ -3,7 +3,8 @@ class Api::V1::AuthController < ApplicationController
     user = User.new(user_params)
 
     if user.save
-      token = JsonWebToken.encode(user_id: user.id)
+    SendWelcomeEmailJob.perform_later(user.id)
+
 
       render json: { message: "Bạn đã đăng ký thành công" }, status: :created
     else
